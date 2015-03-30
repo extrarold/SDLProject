@@ -8,16 +8,20 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <SDL2_image/SDL_image.h>
+#include <SDL2_mixer/SDL_mixer.h>
+#include <SDL2_ttf/SDL_ttf.h>
 
 int main(int argc, const char * argv[]) {
     
     SDL_Window *window;                    // Declare a pointer
+    SDL_Renderer *renderer;
     
     SDL_Init(SDL_INIT_VIDEO);              // Initialize SDL2
     
     // Create an application window with the following settings:
     window = SDL_CreateWindow(
-                              "An SDL2 window",                  // window title
+                              "Eggnogg 2.0",                  // window title
                               SDL_WINDOWPOS_UNDEFINED,           // initial x position
                               SDL_WINDOWPOS_UNDEFINED,           // initial y position
                               640,                               // width, in pixels
@@ -32,9 +36,25 @@ int main(int argc, const char * argv[]) {
         return 1;
     }
     
-    // The window is open: enter program loop (see SDL_PollEvent)
+    // Boucle principal, s'arrete quand clique sur la croix
+    int terminer = 0;
+    SDL_Event evenements;
     
-    SDL_Delay(3000);  // Pause execution for 3000 milliseconds, for example
+    while(terminer == 0) {
+        SDL_WaitEvent(&evenements);
+        SDL_ShowCursor(SDL_DISABLE);
+        
+        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+        
+        SDL_SetRenderDrawColor(renderer, 17, 206, 112, 255);
+        SDL_RenderClear(renderer);
+        SDL_RenderPresent(renderer);
+        
+        
+        if(evenements.window.event == SDL_WINDOWEVENT_CLOSE)
+            terminer = 1;
+    }
+    // The window is open: enter program loop (see SDL_PollEvent)
     
     // Close and destroy the window
     SDL_DestroyWindow(window);
