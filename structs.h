@@ -23,7 +23,7 @@ typedef struct Map {
     int beginx, beginy;
     int startX, startY;
     int maxX, maxY;
-    int tile[SCREEN_HEIGHT][SCREEN_WIDTH];
+    int tile[MAX_MAP_Y][MAX_MAP_X];
     int tileSetNumber;
 }Map;
 
