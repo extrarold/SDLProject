@@ -64,7 +64,7 @@ void drawMap() {
     y1 = (map.startY % TILE_SIZE) * -1;
     y2 = y1 + SCREEN_HEIGHT + (y1 == 0 ? 0 : TILE_SIZE);
     
-    for( y = y1; y < y2; y += TILE_SIZE) {
+    for(y = y1; y < y2; y += TILE_SIZE) {
         mapX = map.startX / TILE_SIZE;
         for(x = x1; x < x2; x += TILE_SIZE) {
             a = map.tile[mapY][mapX];
