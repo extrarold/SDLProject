@@ -22,11 +22,11 @@
 
 /* taille de la fenêtre: 1360x768 pixels (peut changer)*/
 #define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 1024
+#define SCREEN_HEIGHT 736
 
 /* taille de la map */
 #define MAX_MAP_X 40
-#define MAX_MAP_Y 32
+#define MAX_MAP_Y 27
 
 /* taille d'une tile  32 x 32 */
 #define TILE_SIZE 32
