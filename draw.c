@@ -1,0 +1,55 @@
+//
+//  draw.c
+//  SDLTest
+//
+//  Created by Harold Heim on 01/05/2015.
+//  Copyright (c) 2015 Harold Heim. All rights reserved.
+//
+
+#include "prototypes.h"
+
+void drawGame() {
+    
+    drawImage(getBackground(), 0, 0);
+    SDL_RenderPresent(getRenderer());
+    
+    SDL_Delay(1);
+}
+
+void delay(unsigned int fpsLimit) {
+    unsigned int ticks = SDL_GetTicks();
+    
+    if(fpsLimit < ticks)
+        return;
+    
+    if (fpsLimit > ticks + 16)
+        SDL_Delay(16);
+    else
+        SDL_Delay(fpsLimit - ticks);
+}
+
+SDL_Texture *loadImage(char *name) {
+    SDL_Surface *loadedImage = NULL;
+    SDL_Texture *texture = NULL;
+    loadedImage = IMG_Load(name);
+    
+    if(loadedImage != NULL) {
+        texture = SDL_CreateTextureFromSurface(getRenderer(), loadedImage);
+        
+        SDL_FreeSurface(loadedImage);
+        loadedImage = NULL;
+    } else
+        printf("L'image n'a pas pu etre chargée ! Error : %s\n", SDL_GetError());
+    
+    return texture;
+}
+
+void drawImage(SDL_Texture *image, int x, int y) {
+    SDL_Rect dest;
+    
+    dest.x = x;
+    dest.y = y;
+    
+    SDL_QueryTexture(image, NULL, NULL, &dest.w, &dest.h);
+    SDL_RenderCopy(getRenderer(), image, NULL, &dest);
+}
