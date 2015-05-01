@@ -24,5 +24,11 @@ void cleanMaps();
 void loadGame();
 SDL_Texture *loadImage(char *name);
 void drawImage(SDL_Texture *image, int x, int y);
+void loadMap(char *name);
+void drawMap();
+void changeLevel();
+int getLevel();
+void setValeurDuNiveau(int level);
+void drawTile(SDL_Texture *image, int destx, int desty, int srcx, int srcy);
 
 #endif

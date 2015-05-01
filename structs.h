@@ -17,5 +17,15 @@ typedef struct Input {
 
 typedef struct Map {
     SDL_Texture *background;
+    SDL_Texture *tileSet;
+    
+    int tileSetAffiche;
+    int beginx, beginy;
+    int startX, startY;
+    int maxX, maxY;
+    int tile[SCREEN_HEIGHT][SCREEN_WIDTH];
+    int tileSetNumber;
 }Map;
+
+
 #endif

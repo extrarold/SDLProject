@@ -79,5 +79,8 @@ void clean() {
 
 void loadGame() {
     initMaps();
+    
+    setValeurDuNiveau(1);
+    changeLevel();
 }
 

@@ -24,4 +24,7 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 1024
 
+/* taille d'une tile  32 x 32 */
+#define TILE_SIZE 32
+
 #endif

@@ -11,6 +11,9 @@
 void drawGame() {
     
     drawImage(getBackground(), 0, 0);
+    
+    drawMap();
+    
     SDL_RenderPresent(getRenderer());
     
     SDL_Delay(1);
@@ -52,4 +55,22 @@ void drawImage(SDL_Texture *image, int x, int y) {
     
     SDL_QueryTexture(image, NULL, NULL, &dest.w, &dest.h);
     SDL_RenderCopy(getRenderer(), image, NULL, &dest);
+}
+
+void drawTile(SDL_Texture *image, int destx, int desty, int srcx, int srcy) {
+    SDL_Rect dest;
+    
+    dest.x = destx;
+    dest.y = desty;
+    dest.w = TILE_SIZE;
+    dest.h = TILE_SIZE;
+    
+    SDL_Rect src;
+    
+    src.x = srcx;
+    src.y = srcy;
+    src.w = TILE_SIZE;
+    src.h = TILE_SIZE;
+    
+    SDL_RenderCopy(getRenderer(), image, &src, &dest);
 }
