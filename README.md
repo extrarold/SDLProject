@@ -1,2 +1,2 @@
 # SDLProject
-# DOC 
+# Eggnogg style
