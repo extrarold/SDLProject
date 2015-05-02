@@ -1,5 +1,4 @@
-# SDLProject
-# Eggnogg style
+# Projet de C - TELECOM Nancy - 2014/2015
 
 Jeu réalisé en C par Soufiane AAZA, Harold HEIM et Loïc HEN.
 
