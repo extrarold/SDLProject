@@ -14,6 +14,8 @@ void drawGame() {
     
     drawMap();
     
+    drawPlayer();
+    
     SDL_RenderPresent(getRenderer());
     
     SDL_Delay(1);
@@ -32,20 +34,27 @@ void delay(unsigned int fpsLimit) {
 }
 
 SDL_Texture *loadImage(char *name) {
+    
     SDL_Surface *loadedImage = NULL;
     SDL_Texture *texture = NULL;
+    
     loadedImage = IMG_Load(name);
     
     if(loadedImage != NULL) {
+        
+        SDL_SetColorKey(loadedImage, SDL_TRUE, SDL_MapRGB(loadedImage->format, 255, 255, 255));
+        
         texture = SDL_CreateTextureFromSurface(getRenderer(), loadedImage);
         
         SDL_FreeSurface(loadedImage);
         loadedImage = NULL;
+        
     } else
         printf("L'image n'a pas pu etre chargée ! Error : %s\n", SDL_GetError());
     
     return texture;
 }
+
 
 void drawImage(SDL_Texture *image, int x, int y) {
     SDL_Rect dest;

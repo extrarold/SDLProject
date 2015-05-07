@@ -25,10 +25,36 @@
 #define SCREEN_HEIGHT 736
 
 /* taille de la map */
-#define MAX_MAP_X 40
-#define MAX_MAP_Y 27
+#define MAP_X 40
+#define MAP_Y 23
+
+#define MAX_MAP_X 400
+#define MAX_MAP_Y 150
 
 /* taille d'une tile  32 x 32 */
 #define TILE_SIZE 32
+
+#define PLAYER_SPEED 4
+
+#define TIME_BETWEEN_2_FRAMES_PLAYER 4
+
+#define IDLE 0
+#define WALK 1
+#define JUMP 3
+
+#define RIGHT 1
+#define LEFT 2
+
+#define PLAYER_WIDTH 69
+#define PLAYER_HEIGHT 100
+
+#define GRAVITY_SPEED 0.6
+#define MAX_FALL_SPEED 15
+#define JUMP_HEIGHT 10
+
+#define BLANK_TILE 4
+#define TILE_TRANSVERSABLE 4
+
+
 
 #endif

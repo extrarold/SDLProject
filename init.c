@@ -21,7 +21,8 @@ void init(char *title) {
     screen = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     
     // Création du rendu avec synchro verticale activée
-    renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_PRESENTVSYNC);
+    renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
+    
     
     // Curseur de la souris caché
     SDL_ShowCursor(SDL_DISABLE);
@@ -31,6 +32,8 @@ void init(char *title) {
         printf("Impossible de créer une fenêtre %d x %d: %s\n", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_GetError());
         exit(1);
     }
+    
+    
     
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
@@ -63,6 +66,9 @@ void clean() {
     // Fermeture des libs SDL et pointeurs à NULL
     
     cleanMaps();
+    
+    cleanPlayer();
+    
     Mix_CloseAudio();
     Mix_Quit();
     
@@ -79,6 +85,8 @@ void clean() {
 
 void loadGame() {
     initMaps();
+    
+    initPlayerSprites();
     
     setValeurDuNiveau(1);
     changeLevel();

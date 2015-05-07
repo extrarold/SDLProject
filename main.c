@@ -9,7 +9,8 @@
 
 #include "prototypes.h"
 
-Input input;
+
+
 
 int main(int argc, const char * argv[]) {
     
@@ -21,16 +22,20 @@ int main(int argc, const char * argv[]) {
     
     loadGame();
     
+    initializePlayer();
+    
     atexit(clean);
     
     startGame = 1;
     
     while(startGame == 1) {
+
+        update();
         
-        gestionInputs(&input);
         drawGame();
         delay(fpsLimit);
         fpsLimit = SDL_GetTicks() + 16;
+        
     }
     
     exit(0);

@@ -8,13 +8,8 @@
 
 #include "prototypes.h"
 
-void gestionInputs(Input *input) {
 
-    getInput(input);
-}
-
-
-void getInput(Input *input) {
+void getInputs(Input *input1, Input *input2) {
     SDL_Event event;
 
     
@@ -34,33 +29,41 @@ void getInput(Input *input) {
                     exit(0);
                     break;
                     
-                case SDLK_c:
-                    input->jump = 1;
+                case SDLK_UP:
+                    input1->jump = 1;
+                    break;
+                    
+                case SDLK_z:
+                    input2->jump = 1;
                     break;
                     
                 case SDLK_v:
-                    input->attack = 1;
+                    input1->attack = 1;
                     break;
                     
                 case SDLK_LEFT:
-                    input->left = 1;
+                    input1->left = 1;
+                    break;
+                    
+                case SDLK_q:
+                    input2->left = 1;
                     break;
                     
                 case SDLK_RIGHT:
-                    input->right = 1;
+                    input1->right = 1;
+                    break;
+                
+                case SDLK_d:
+                    input2->right = 1;
                     break;
                     
                 case SDLK_DOWN:
-                    input->down = 1;
-                    break;
-                    
-                case SDLK_UP:
-                    input->up = 1;
+                    input1->down = 1;
                     break;
                     
                     
                 case SDLK_RETURN:
-                    input->enter = 1;
+                    input1->enter = 1;
                     break;
                     
                     
@@ -72,28 +75,36 @@ void getInput(Input *input) {
             case SDL_KEYUP:
                 switch (event.key.keysym.sym)
             {                    
-                case SDLK_c:
-                    input->jump = 0;
+                case SDLK_UP:
+                    input1->jump = 0;
+                    break;
+                
+                case SDLK_z:
+                    input2->jump = 0;
                     break;
                     
                 case SDLK_LEFT:
-                    input->left = 0;
+                    input1->left = 0;
                     break;
                     
                 case SDLK_RIGHT:
-                    input->right = 0;
+                    input1->right = 0;
+                    break;
+                    
+                case SDLK_q:
+                    input2->left = 0;
+                    break;
+                    
+                case SDLK_d:
+                    input2->right = 0;
                     break;
                     
                 case SDLK_DOWN:
-                    input->down = 0;
-                    break;
-                    
-                case SDLK_UP:
-                    input->up = 0;
+                    input1->down = 0;
                     break;
                     
                 case SDLK_RETURN:
-                    input->enter = 0;
+                    input1->enter = 0;
                     break;
                     
                 default:
@@ -105,3 +116,4 @@ void getInput(Input *input) {
         
     }
 }
+

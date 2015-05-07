@@ -20,12 +20,22 @@ typedef struct Map {
     SDL_Texture *tileSet;
     
     int tileSetAffiche;
-    int beginx, beginy;
+    int begin_player1x, begin_player1y, begin_player2x, begin_player2y;
     int startX, startY;
     int maxX, maxY;
-    int tile[MAX_MAP_Y][MAX_MAP_X];
+    int tile[MAP_Y][MAP_X];
     int tileSetNumber;
 }Map;
 
+typedef struct GameOBject {
+    int life, invincibleTimer;
+    int x, y;
+    int h, w;
+    int frameNumber, frameTimer, frameMax;
+    int etat, direction;
+    int onGround, timerMort;
+    float dirX, dirY;
+    int saveX, saveY;
+}GameObject;
 
 #endif
