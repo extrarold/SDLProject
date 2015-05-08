@@ -55,6 +55,7 @@ void update();
 void loadMusic(char *name);
 void cleanMusic();
 void playMusic();
-
+TTF_Font *getFjalla();
+SDL_Texture *drawMessage(char *texte);
 
 #endif

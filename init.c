@@ -10,9 +10,14 @@
 
 SDL_Window *screen;
 SDL_Renderer *renderer;
+TTF_Font *fjallaFont;
 
 SDL_Renderer *getRenderer() {
     return renderer;
+}
+
+TTF_Font *getFjalla() {
+    return fjallaFont;
 }
 
 void init(char *title) {
@@ -20,8 +25,9 @@ void init(char *title) {
     // Création de la fenêtre
     screen = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     
-    // Création du rendu avec synchro verticale activée
+    // Création du rendu avec synchro accélérée
     renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);
+    
     
     
     // Curseur de la souris caché
@@ -32,9 +38,7 @@ void init(char *title) {
         printf("Impossible de créer une fenêtre %d x %d: %s\n", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_GetError());
         exit(1);
     }
-    
-    
-    
+
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
         printf("SDL_image non iniatilisé : %s\n", IMG_GetError());
@@ -43,6 +47,13 @@ void init(char *title) {
     
     if( TTF_Init() < 0) {
         printf("Impossible d'initialiser TTF: %s\n", TTF_GetError());
+        exit(1);
+    }
+    
+    fjallaFont = TTF_OpenFont("fonts/bitter.ttf", 100);
+    
+    if(fjallaFont == NULL) {
+        printf("Impossible de créer un font: %s", TTF_GetError());
         exit(1);
     }
     
@@ -70,6 +81,8 @@ void clean() {
     cleanPlayer();
     
     cleanMusic();
+    
+    TTF_CloseFont(fjallaFont);
     
     Mix_CloseAudio();
     Mix_Quit();

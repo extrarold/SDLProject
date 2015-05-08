@@ -39,7 +39,7 @@
 #define TIME_BETWEEN_2_FRAMES_PLAYER 4
 
 #define IDLE 0
-#define WALK 1
+#define WALK 2
 #define JUMP 3
 
 #define RIGHT 1

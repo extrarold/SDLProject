@@ -16,6 +16,8 @@ void drawGame() {
     
     drawPlayer();
     
+    drawImage(drawMessage("FIGHT"), 1280/2-150, 2);
+    
     SDL_RenderPresent(getRenderer());
     
     SDL_Delay(1);
@@ -82,4 +84,17 @@ void drawTile(SDL_Texture *image, int destx, int desty, int srcx, int srcy) {
     src.h = TILE_SIZE;
     
     SDL_RenderCopy(getRenderer(), image, &src, &dest);
+}
+
+SDL_Texture *drawMessage(char *texte) {
+    
+    SDL_Color color = {152 , 56, 153};
+    
+    SDL_Surface *surface = TTF_RenderText_Solid(getFjalla(), texte, color);
+    
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(getRenderer(), surface);
+    
+    SDL_FreeSurface(surface);
+    surface = NULL;
+    return texture;
 }
