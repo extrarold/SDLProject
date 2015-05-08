@@ -66,6 +66,16 @@ void getInputs(Input *input1, Input *input2) {
                     input1->enter = 1;
                     break;
                     
+                case SDLK_t:
+                    if(Mix_PlayingMusic() == 0)
+                        playMusic();
+                    else {
+                        if(Mix_PausedMusic())
+                            Mix_ResumeMusic();
+                        else
+                            Mix_PauseMusic();
+                    }
+                        
                     
                 default:
                     break;

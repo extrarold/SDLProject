@@ -52,6 +52,9 @@ int getStartX();
 void updatePlayer(GameObject *player, Input *input);
 void mapCollision(GameObject *entity);
 void update();
+void loadMusic(char *name);
+void cleanMusic();
+void playMusic();
 
 
 #endif

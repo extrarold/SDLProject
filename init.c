@@ -69,6 +69,8 @@ void clean() {
     
     cleanPlayer();
     
+    cleanMusic();
+    
     Mix_CloseAudio();
     Mix_Quit();
     
@@ -87,6 +89,8 @@ void loadGame() {
     initMaps();
     
     initPlayerSprites();
+    
+    loadMusic("sounds/mhysa.mp3");
     
     setValeurDuNiveau(1);
     changeLevel();

@@ -33,7 +33,9 @@ int main(int argc, const char * argv[]) {
         update();
         
         drawGame();
+        
         delay(fpsLimit);
+        
         fpsLimit = SDL_GetTicks() + 16;
         
     }
