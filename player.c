@@ -21,8 +21,12 @@ void setValeurDuNiveau(int valeur) {
     level = valeur;
 }
 
-GameObject *getPlayer() {
+GameObject *getPlayer1() {
     return &player1;
+}
+
+GameObject *getPlayer2() {
+    return &player2;
 }
 
 int getPlayerx() {
@@ -41,122 +45,72 @@ void setPlayery(int valeur) {
     player1.y = valeur;
 }
 
-void initPlayerSprites() {
-    playerSpriteSheet = loadImage("graphics/leonardo.gif");
-    playerSpriteSheet2 = loadImage("graphics/donatello.gif");;
-}
 
-void cleanPlayer() {
-    if(playerSpriteSheet != NULL) {
-        SDL_DestroyTexture(playerSpriteSheet);
-        playerSpriteSheet = NULL;
+void cleanPlayer(SDL_Texture *name) {
+    if(name != NULL) {
+        SDL_DestroyTexture(name);
+        name = NULL;
     }
 }
 
-void initializePlayer() {
+void initializePlayer(GameObject *player, int x, int y, int direction, char *nameTexture) {
     
-    player1.life = 3;
-    player1.invincibleTimer = 0;
-    player1.direction = RIGHT;
-    player1.etat = IDLE;
+    player->life = 3;
+    player->invincibleTimer = 0;
+    player->direction = direction;
+    player->etat = IDLE;
     
-    player1.frameNumber = 0;
-    player1.frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
+    player->frameNumber = 0;
+    player->frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
     
-    player1.frameMax = 4;
+    player->frameMax = 4;
     
-    player1.x = getBeginPlayer1X();
-    player1.y = getBeginPlayer1Y();
+    player->x = x;
+    player->y = y;
 
     
-    player1.w = PLAYER_WIDTH;
-    player1.h = PLAYER_HEIGHT;
+    player->w = PLAYER_WIDTH;
+    player->h = PLAYER_HEIGHT;
     
-    player1.timerMort = 0;
-    player1.onGround = 0;
+    player->timerMort = 0;
+    player->onGround = 0;
     
-    player2.life = 3;
-    player2.invincibleTimer = 0;
-    player2.direction = LEFT;
-    player2.etat = IDLE;
-    
-    player2.frameNumber = 0;
-    player2.frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
-    
-    player2.frameMax = 4;
-    
-    player2.x = getBeginPlayer2X();
-    player2.y = getBeginPlayer2Y();
-    
-    
-    player2.w = PLAYER_WIDTH;
-    player2.h = PLAYER_HEIGHT;
-    
-    player2.timerMort = 0;
-    player2.onGround = 0;
+    player->spriteSheet = loadImage(nameTexture);
 }
 
 
 
-void drawPlayer() {
+void drawPlayer(GameObject *player) {
     
-    /*if(player1.frameTimer <= 0) {
-        player1.frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
+    if(player->frameTimer <= 0) {
+        player->frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
         
-        player1.frameNumber++;
+        player->frameNumber++;
         
-        if(player1.frameNumber >= player1.frameMax)
-            player1.frameNumber = 0;
+        if(player->frameNumber >= player->frameMax)
+            player->frameNumber = 0;
     } else
-        player1.frameTimer--;
-    */
+        player->frameTimer--;
+    
     SDL_Rect dest;
-    dest.x = player1.x - getStartX();
-    dest.y = player1.y - getStartY();
-    dest.w = player1.w;
-    dest.h = player1.h;
+    dest.x = player->x - getStartX();
+    dest.y = player->y - getStartY();
+    dest.w = player->w;
+    dest.h = player->h;
     
     SDL_Rect src;
-    src.x = player1.frameNumber * player1.w;
-    src.w = player1.w;
-    src.h = player1.h;
-    src.y = player1.etat * player1.h;
+    src.x = player->frameNumber * player->w;
+    src.w = player->w;
+    src.h = player->h;
+    src.y = player->etat * player->h;
     
-    if(player1.direction == LEFT)
-        SDL_RenderCopyEx(getRenderer(), playerSpriteSheet, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
+    if(player->direction == LEFT)
+        SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
     else
-        SDL_RenderCopyEx(getRenderer(), playerSpriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
-    /*
-    if(player2.frameTimer <= 0) {
-        player2.frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
-        
-        player2.frameNumber++;
-        
-        if(player2.frameNumber >= player2.frameMax)
-            player2.frameNumber = 0;
-    } else
-        player2.frameTimer--;
-    */
-    SDL_Rect dest2;
-    dest2.x = player2.x - getStartX();
-    dest2.y = player2.y - getStartY();
-    dest2.w = player2.w;
-    dest2.h = player2.h;
-    
-    SDL_Rect src2;
-    src2.x = player2.frameNumber * player2.w;
-    src2.w = player2.w;
-    src2.h = player2.h;
-    src2.y = player2.etat * player2.h;
-    
-    if(player2.direction == LEFT)
-        SDL_RenderCopyEx(getRenderer(), playerSpriteSheet2, &src2, &dest2, 0, 0, SDL_FLIP_HORIZONTAL);
-    else
-        SDL_RenderCopyEx(getRenderer(), playerSpriteSheet2, &src2, &dest2, 0, 0, SDL_FLIP_NONE);
-
+        SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
 }
 
-void update() {
+void updateInputs() {
     
     getInputs(&input_player2, &input_player1);
     
@@ -303,7 +257,7 @@ void updatePlayer(GameObject *player, Input *input)
         {
             // Si on est mort, on réinitialise le niveau
             changeLevel();
-            initializePlayer();
+           // initializePlayer();
         }
     }
 }

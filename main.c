@@ -10,8 +10,6 @@
 #include "prototypes.h"
 
 
-
-
 int main(int argc, const char * argv[]) {
     
     unsigned int fpsLimit = SDL_GetTicks() + 16;
@@ -22,7 +20,8 @@ int main(int argc, const char * argv[]) {
     
     loadGame();
     
-    initializePlayer();
+    initializePlayer(getPlayer1(), getBeginPlayer1X(), getBeginPlayer1Y(), RIGHT, "graphics/donatelloV10.gif");
+    initializePlayer(getPlayer2(), getBeginPlayer2X(), getBeginPlayer2Y(), LEFT, "graphics/donatellobleu.gif");
     
     atexit(clean);
     
@@ -30,7 +29,7 @@ int main(int argc, const char * argv[]) {
     
     while(startGame == 1) {
 
-        update();
+        updateInputs();
         
         drawGame();
         

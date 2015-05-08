@@ -39,14 +39,14 @@
 #define TIME_BETWEEN_2_FRAMES_PLAYER 4
 
 #define IDLE 0
-#define WALK 2
-#define JUMP 3
+#define WALK 1
+#define JUMP 2
 
 #define RIGHT 1
 #define LEFT 2
 
-#define PLAYER_WIDTH 69
-#define PLAYER_HEIGHT 100
+#define PLAYER_WIDTH 45
+#define PLAYER_HEIGHT 85
 
 #define GRAVITY_SPEED 0.6
 #define MAX_FALL_SPEED 15

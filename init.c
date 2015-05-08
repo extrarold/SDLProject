@@ -78,7 +78,8 @@ void clean() {
     
     cleanMaps();
     
-    cleanPlayer();
+    cleanPlayer(getPlayer1()->spriteSheet);
+    cleanPlayer(getPlayer2()->spriteSheet);
     
     cleanMusic();
     
@@ -100,8 +101,6 @@ void clean() {
 
 void loadGame() {
     initMaps();
-    
-    initPlayerSprites();
     
     loadMusic("sounds/mhysa.mp3");
     

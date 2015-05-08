@@ -14,7 +14,8 @@ void drawGame() {
     
     drawMap();
     
-    drawPlayer();
+    drawPlayer(getPlayer1());
+    drawPlayer(getPlayer2());
     
     drawImage(drawMessage("FIGHT"), 1280/2-150, 2);
     

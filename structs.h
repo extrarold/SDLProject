@@ -36,6 +36,7 @@ typedef struct GameOBject {
     int onGround, timerMort;
     float dirX, dirY;
     int saveX, saveY;
+    SDL_Texture *spriteSheet;
 }GameObject;
 
 #endif
