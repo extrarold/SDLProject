@@ -229,8 +229,10 @@ void updatePlayer(GameObject *player, Input *input)
                 player->frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
                 player->frameMax = 4;
             }
-        }
         
+        }
+    
+    
         //Si on n'appuie sur rien et qu'on est sur le sol, on charge l'animation marquant l'inactivité (Idle)
         else if (input->right == 0 && input->left == 0 && player->onGround == 1)
         {
@@ -281,17 +283,18 @@ void updatePlayer(GameObject *player, Input *input)
                 }
             }
         }
+            if(player->saveX == 0) {
+                
+                if(input->attack == 1) {
+                    
+                    player->etat = ATK;
+                    player->frameNumber = 1;
+                    player->frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
+                    player->frameMax = 4;
+                }
+
+           }
         
-        if(player->saveX == 0) {
-            if(input->attack == 1) {
-               
-                player->etat = ATK;
-                player->w = 70;
-                player->frameNumber = 0;
-                player->frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
-                player->frameMax = 6;
-            }
-        }
         //On rajoute notre fonction de détection des collisions qui va mettre à
         //jour les coordonnées de notre super lapin.
         mapCollision(player);
