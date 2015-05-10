@@ -50,7 +50,7 @@
 
 #define GRAVITY_SPEED 0.6
 #define MAX_FALL_SPEED 15
-#define JUMP_HEIGHT 10
+#define JUMP_HEIGHT 12
 
 #define BLANK_TILE 4
 #define TILE_TRANSVERSABLE 4
