@@ -58,12 +58,12 @@ void cleanMusic();
 void playMusic();
 TTF_Font *getFjalla();
 SDL_Texture *drawMessage(char *texte);
-SDL_Texture *getMessage();
-void setMessage(SDL_Texture *message);
+SDL_Texture *getHealth1();
+void setHealth1(SDL_Texture *message);
 void reinitializePlayers();
 void playJump();
 void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2);
-SDL_Texture *getMessage2();
-void setMessage2(SDL_Texture *message);
+SDL_Texture *getHealth2();
+void setHealth2(SDL_Texture *message);
 
 #endif

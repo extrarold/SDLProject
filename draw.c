@@ -17,8 +17,8 @@ void drawGame() {
     drawPlayer(getPlayer1());
     drawPlayer(getPlayer2());
     
-    drawImage(getMessage(), 400, 2);
-    drawImage(getMessage2(), 400, 2);
+    drawImage(getHealth1(), 2, 2);
+    drawImage(getHealth2(), 600, 2);
 
     SDL_RenderPresent(getRenderer());
     
@@ -46,7 +46,6 @@ SDL_Texture *loadImage(char *name) {
     
     if(loadedImage != NULL) {
         
-        SDL_SetColorKey(loadedImage, SDL_TRUE, SDL_MapRGB(loadedImage->format, 255, 255, 255));
         
         texture = SDL_CreateTextureFromSurface(getRenderer(), loadedImage);
         

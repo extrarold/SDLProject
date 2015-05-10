@@ -18,8 +18,8 @@ typedef struct Input {
 typedef struct Map {
     SDL_Texture *background;
     SDL_Texture *tileSet;
-    SDL_Texture *message;
-    SDL_Texture *message2;
+    SDL_Texture *health1;
+    SDL_Texture *health2;
     
     int tileSetAffiche;
     int begin_player1x, begin_player1y, begin_player2x, begin_player2y;

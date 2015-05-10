@@ -41,12 +41,13 @@
 #define IDLE 0
 #define WALK 1
 #define JUMP 2
+#define ATK 3
 
 #define RIGHT 1
 #define LEFT 2
 
-#define PLAYER_WIDTH 45
-#define PLAYER_HEIGHT 87
+#define PLAYER_WIDTH 79
+#define PLAYER_HEIGHT 95
 
 #define GRAVITY_SPEED 0.6
 #define MAX_FALL_SPEED 15

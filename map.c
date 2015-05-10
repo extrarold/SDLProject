@@ -13,28 +13,28 @@ Map map;
 void initMaps() {
     map.background = loadImage("graphics/background.jpg");
     map.tileSetNumber = 0;
-    map.message = NULL;
-    map.message2 = NULL;
+    map.health1 = NULL;
+    map.health2 = NULL;
 }
 
 SDL_Texture *getBackground() {
     return map.background;
 }
 
-SDL_Texture *getMessage() {
-    return map.message;
+SDL_Texture *getHealth1() {
+    return map.health1;
 }
 
-SDL_Texture *getMessage2() {
-    return map.message2;
+SDL_Texture *getHealth2() {
+    return map.health2;
 }
 
-void setMessage(SDL_Texture *message) {
-    map.message = message;
+void setHealth1(SDL_Texture *message) {
+    map.health1 = message;
 }
 
-void setMessage2(SDL_Texture *message) {
-    map.message2 = message;
+void setHealth2(SDL_Texture *message) {
+    map.health2 = message;
 }
 
 
