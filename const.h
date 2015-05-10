@@ -46,11 +46,11 @@
 #define LEFT 2
 
 #define PLAYER_WIDTH 45
-#define PLAYER_HEIGHT 85
+#define PLAYER_HEIGHT 87
 
 #define GRAVITY_SPEED 0.6
 #define MAX_FALL_SPEED 15
-#define JUMP_HEIGHT 10
+#define JUMP_HEIGHT 12
 
 #define BLANK_TILE 4
 #define TILE_TRANSVERSABLE 4
