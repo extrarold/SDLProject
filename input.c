@@ -31,10 +31,12 @@ void getInputs(Input *input1, Input *input2) {
                     
                 case SDLK_UP:
                     input1->jump = 1;
+                    playJump();
                     break;
                     
                 case SDLK_z:
                     input2->jump = 1;
+                    playJump();
                     break;
                     
                 case SDLK_v:
@@ -59,6 +61,7 @@ void getInputs(Input *input1, Input *input2) {
                     
                 case SDLK_DOWN:
                     input1->down = 1;
+                    
                     break;
                     
                     

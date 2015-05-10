@@ -13,11 +13,21 @@ Map map;
 void initMaps() {
     map.background = loadImage("graphics/background.jpg");
     map.tileSetNumber = 0;
+    map.message = NULL;
 }
 
 SDL_Texture *getBackground() {
     return map.background;
 }
+
+SDL_Texture *getMessage() {
+    return map.message;
+}
+
+void setMessage(SDL_Texture *message) {
+    map.message = message;
+}
+
 
 void cleanMaps() {
     if(map.background != NULL) {
@@ -326,12 +336,5 @@ void mapCollision(GameObject *entity)
         //Si on touche le bord droit de l'écran, on annule
         //et on limite le déplacement du joueur
         entity->x = map.maxX - entity->w - 1;
-    }
-    
-    //Maintenant, s'il sort de l'écran par le bas (chute dans un trou sans fond), on lance le timer
-    //qui gère sa mort et sa réinitialisation (plus tard on gèrera aussi les vies).
-    if (entity->y > map.maxY)
-    {
-        entity->timerMort = 60;
     }
 }

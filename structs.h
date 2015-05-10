@@ -18,6 +18,7 @@ typedef struct Input {
 typedef struct Map {
     SDL_Texture *background;
     SDL_Texture *tileSet;
+    SDL_Texture *message;
     
     int tileSetAffiche;
     int begin_player1x, begin_player1y, begin_player2x, begin_player2y;
@@ -38,5 +39,6 @@ typedef struct GameOBject {
     int saveX, saveY;
     SDL_Texture *spriteSheet;
 }GameObject;
+
 
 #endif

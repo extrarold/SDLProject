@@ -10,7 +10,6 @@
 
 int level;
 GameObject player1, player2;
-SDL_Texture *playerSpriteSheet, *playerSpriteSheet2;
 Input input_player1, input_player2;
 
 int getLevel() {
@@ -118,7 +117,27 @@ void updateInputs() {
     
     updatePlayer(&player1, &input_player1);
     
+    if(player1.x > 50) {
+        setMessage(drawMessage("<-"));
+        
+            
+            //setValeurDuNiveau(2);
+            //changeLevel();
+            //reinitializePlayers();
+    } else
+        setMessage(NULL);
+
+
+}
+
+void reinitializePlayers() {
+    player1.x = getBeginPlayer1X();
+    player2.x = getBeginPlayer2X();
+    player1.y = getBeginPlayer1Y();
+    player2.y = getBeginPlayer2Y();
     
+    player1.direction = RIGHT;
+    player2.direction = LEFT;
 }
 
 
@@ -241,23 +260,5 @@ void updatePlayer(GameObject *player, Input *input)
         //jour les coordonnées de notre super lapin.
         mapCollision(player);
         
-        
-    }
-    
-    //Gestion de la mort quand le héros tombe dans un trou :
-    //Si timerMort est différent de 0, c'est qu'il faut réinitialiser le joueur.
-    //On ignore alors ce qui précède et on joue cette boucle (un wait en fait) jusqu'à ce que
-    // timerMort == 1. A ce moment-là, on le décrémente encore -> il vaut 0 et on réinitialise
-    //le jeu avec notre bonne vieille fonction d'initialisation ;) !
-    if (player->timerMort > 0)
-    {
-        player->timerMort--;
-        
-        if (player->timerMort == 0)
-        {
-            // Si on est mort, on réinitialise le niveau
-            changeLevel();
-           // initializePlayer();
-        }
     }
 }
