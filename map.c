@@ -14,6 +14,7 @@ void initMaps() {
     map.background = loadImage("graphics/background.jpg");
     map.tileSetNumber = 0;
     map.message = NULL;
+    map.message2 = NULL;
 }
 
 SDL_Texture *getBackground() {
@@ -24,8 +25,16 @@ SDL_Texture *getMessage() {
     return map.message;
 }
 
+SDL_Texture *getMessage2() {
+    return map.message2;
+}
+
 void setMessage(SDL_Texture *message) {
     map.message = message;
+}
+
+void setMessage2(SDL_Texture *message) {
+    map.message2 = message;
 }
 
 

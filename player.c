@@ -117,17 +117,24 @@ void updateInputs() {
     
     updatePlayer(&player1, &input_player1);
     
-    if(player1.x > 50) {
-        setMessage(drawMessage("<-"));
-        
-            
-            //setValeurDuNiveau(2);
-            //changeLevel();
-            //reinitializePlayers();
-    } else
+    fight(&player1, &player2, &input_player1, &input_player2);
+
+}
+
+void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2) {
+    
+    if((player1->x +player1->w < player2->x + player2->w && player1->x + player1->w >player2->x && input1->attack == 1)
+       || (player1->x < player2->x + player2->w && player1->x > player2->x && input1->attack == 1))
+         setMessage(drawMessage("Touche player 1"));
+    else
         setMessage(NULL);
-
-
+    
+    if((player2->x +player2->w < player1->x + player1->w && player2->x + player2->w >player1->x && input2->attack == 1)
+      || (player2->x < player1->x + player1->w && player2->x > player1->x && input2->attack == 1))
+        setMessage2(drawMessage("Touche player 2"));
+    else
+        setMessage2(NULL);
+    
 }
 
 void reinitializePlayers() {

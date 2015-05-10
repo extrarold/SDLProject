@@ -13,8 +13,8 @@ Mix_Chunk *gJump = NULL;
 
 
 
-void loadMusic(char *name) {
-    gMusic = Mix_LoadMUS("sounds/mhysa.mp3");
+void loadMusic() {
+    gMusic = Mix_LoadMUS("sounds/seashore.mp3");
     
     if(gMusic == NULL) {
         printf("Erreur lors du chargement de la musique: %s\n", Mix_GetError());
@@ -36,9 +36,11 @@ void cleanMusic() {
 }
 
 void playMusic() {
+    Mix_VolumeMusic(MIX_MAX_VOLUME/4);
     Mix_PlayMusic(gMusic, -1);
 }
 
 void playJump() {
+    Mix_VolumeChunk(gJump, MIX_MAX_VOLUME/4);
     Mix_PlayChannel(-1, gJump, 0);
 }

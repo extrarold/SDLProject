@@ -56,14 +56,14 @@ void init(char *title) {
         printf("Impossible de créer un font: %s", TTF_GetError());
         exit(1);
     }
-   /*
+   
     int mp3Flags = MIX_INIT_MP3;
     int initted = Mix_Init(mp3Flags);
     if((initted & mp3Flags) != mp3Flags) {
         printf("Mix_init: Erreur d'initialisation de Mixer\n");
         printf("Erreur: %s\n", Mix_GetError());
         exit(1);
-    }*/
+    }
 
     if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)  == -1) {
         printf("Mix_OpenAudio error : %s", Mix_GetError());
@@ -102,7 +102,8 @@ void clean() {
 void loadGame() {
     initMaps();
 
-    loadMusic("sounds/seashore.mp3");
+    loadMusic();
+    playMusic();
 
     setValeurDuNiveau(1);
     changeLevel();

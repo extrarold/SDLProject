@@ -43,6 +43,10 @@ void getInputs(Input *input1, Input *input2) {
                     input1->attack = 1;
                     break;
                     
+                case SDLK_a:
+                    input2->attack = 1;
+                    break;
+                    
                 case SDLK_LEFT:
                     input1->left = 1;
                     break;
@@ -94,6 +98,14 @@ void getInputs(Input *input1, Input *input2) {
                 
                 case SDLK_z:
                     input2->jump = 0;
+                    break;
+                
+                case SDLK_v:
+                    input1->attack = 0;
+                    break;
+                    
+                case SDLK_a:
+                    input2->attack = 0;
                     break;
                     
                 case SDLK_LEFT:

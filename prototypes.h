@@ -53,7 +53,7 @@ int getStartX();
 void updatePlayer(GameObject *player, Input *input);
 void mapCollision(GameObject *entity);
 void updateInputs();
-void loadMusic(char *name);
+void loadMusic();
 void cleanMusic();
 void playMusic();
 TTF_Font *getFjalla();
@@ -62,5 +62,8 @@ SDL_Texture *getMessage();
 void setMessage(SDL_Texture *message);
 void reinitializePlayers();
 void playJump();
+void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2);
+SDL_Texture *getMessage2();
+void setMessage2(SDL_Texture *message);
 
 #endif

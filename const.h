@@ -52,8 +52,8 @@
 #define MAX_FALL_SPEED 15
 #define JUMP_HEIGHT 12
 
-#define BLANK_TILE 4
-#define TILE_TRANSVERSABLE 4
+#define BLANK_TILE 20
+#define TILE_TRANSVERSABLE 20
 
 
 

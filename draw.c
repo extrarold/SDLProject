@@ -17,7 +17,8 @@ void drawGame() {
     drawPlayer(getPlayer1());
     drawPlayer(getPlayer2());
     
-    drawImage(getMessage(), 2, 2);
+    drawImage(getMessage(), 400, 2);
+    drawImage(getMessage2(), 400, 2);
 
     SDL_RenderPresent(getRenderer());
     
