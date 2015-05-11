@@ -40,8 +40,9 @@
 
 #define IDLE 0
 #define WALK 1
-#define JUMP 3
 #define ATK 2
+#define JUMP 3
+
 
 #define RIGHT 1
 #define LEFT 2
