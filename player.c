@@ -11,6 +11,11 @@
 int level;
 GameObject player1, player2;
 Input input_player1, input_player2;
+double victoires = 0;
+
+double getVictoires() {
+    return victoires;
+}
 
 int getLevel() {
     return level;
@@ -143,6 +148,7 @@ void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input
         
     if((player1->x +player1->w < player2->x + player2->w && player1->x + player1->w >player2->x && input1->attack == 1)
        || (player1->x < player2->x + player2->w && player1->x > player2->x && input1->attack == 1)) {
+        playKick();
         if (player2->invincibleTimer == 0)
         {
             if(player2->life == 3) {
@@ -155,13 +161,16 @@ void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input
             } else {
                 setHealth2(loadImage("graphics/coeur7.png"));
                 player2->etat = DEATH;
-                reinitializePlayers();
+                
+                victoires++;
+                mondeSuivant(victoires);
             }
             player2->invincibleTimer = 80;
         }
     }
     if((player2->x +player2->w < player1->x + player1->w && player2->x + player2->w >player1->x && input2->attack == 1)
        || (player2->x < player1->x + player1->w && player2->x > player1->x && input2->attack == 1)) {
+        playKick();
         if (player1->invincibleTimer == 0)
         {
             if(player1->life == 3) {
@@ -173,9 +182,9 @@ void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input
                 player1->life--;
             } else {
                 setHealth1(loadImage("graphics/coeur7.png"));
-                 player1->etat = DEATH;
-                reinitializePlayers();
-                mondeSuivant(1, "graphics/background2.png");
+                player1->etat = DEATH;
+                victoires--;
+                mondeSuivant(victoires);
             }
             player1->invincibleTimer = 80;
         }

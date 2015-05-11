@@ -133,10 +133,29 @@ void changeLevel() {
     map.tileSet = loadImage(file);
 }
 
-void mondeSuivant(int level, char *name) {
-    setValeurDuNiveau(level);
-    changeLevel();
-    map.background = loadImage(name);
+void mondeSuivant(double victoires) {
+    reinitializePlayers();
+    printf("%f\n", victoires);
+    if(victoires == 0) {
+        setValeurDuNiveau(1);
+        map.background = loadImage("graphics/background.jpg");
+    }
+    else if(victoires == 1 || victoires == -1) {
+        setValeurDuNiveau(2);
+        map.background = loadImage("graphics/background2.png");
+        changeLevel();
+    } else if(victoires == 2 || victoires == -2) {
+        setValeurDuNiveau(3);
+        map.background = loadImage("graphics/background.jpg");
+        changeLevel();
+    }
+    
+    if(victoires == 3) {
+        
+    } else if(victoires == -3) {
+        
+    }
+    
 }
 
 int getStartX() {
