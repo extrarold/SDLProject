@@ -16,9 +16,10 @@ void drawGame() {
     
     drawPlayer(getPlayer1());
     drawPlayer(getPlayer2());
-    
+    //setHealth1(loadImage("graphics/coeur11.png"));
+    //setHealth2(loadImage("graphics/coeur11.png"));
     drawImage(getHealth1(), 2, 2);
-    drawImage(getHealth2(), 600, 2);
+    drawImage(getHealth2(), 400, 2);
 
     SDL_RenderPresent(getRenderer());
     

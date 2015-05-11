@@ -20,7 +20,7 @@ int main(int argc, const char * argv[]) {
 
     loadGame();
 
-    initializePlayer(getPlayer1(), getBeginPlayer1X(), getBeginPlayer1Y(), RIGHT, "graphics/ryubleu.gif");
+    initializePlayer(getPlayer1(), getBeginPlayer1X(), getBeginPlayer1Y(), RIGHT, "graphics/ryurouge.gif");
     initializePlayer(getPlayer2(), getBeginPlayer2X(), getBeginPlayer2Y(), LEFT, "graphics/ryurouge.gif");
 
     atexit(clean);
