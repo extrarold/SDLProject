@@ -10,14 +10,15 @@
 
 SDL_Window *screen;
 SDL_Renderer *renderer;
-TTF_Font *fjallaFont;
+
+TTF_Font *arcadeFont;
 
 SDL_Renderer *getRenderer() {
     return renderer;
 }
 
 TTF_Font *getFjalla() {
-    return fjallaFont;
+    return arcadeFont;
 }
 
 void init(char *title) {
@@ -50,12 +51,9 @@ void init(char *title) {
         exit(1);
     }
 
-    fjallaFont = TTF_OpenFont("fonts/bitter.ttf", 100);
+    arcadeFont = TTF_OpenFont("fonts/arcade.ttf", 50);
 
-    if(fjallaFont == NULL) {
-        printf("Impossible de créer un font: %s", TTF_GetError());
-        exit(1);
-    }
+
 
     int mp3Flags = MIX_INIT_MP3;
     int initted = Mix_Init(mp3Flags);
@@ -83,7 +81,7 @@ void clean() {
 
     cleanMusic();
 
-    TTF_CloseFont(fjallaFont);
+    TTF_CloseFont(arcadeFont);
 
     Mix_CloseAudio();
     Mix_Quit();

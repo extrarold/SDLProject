@@ -9,6 +9,8 @@
 #include "prototypes.h"
 
 Map map;
+SDL_Texture *player1Name;
+SDL_Texture *player2Name;
 
 void initMaps() {
     map.background = loadImage("graphics/background.jpg");

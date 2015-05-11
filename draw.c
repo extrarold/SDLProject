@@ -16,8 +16,10 @@ void drawGame() {
 
     drawPlayer(getPlayer1());
     drawPlayer(getPlayer2());
-    drawImage(getHealth1(), 12, 2);
-    drawImage(getHealth2(), 1180, 2);
+    drawImage(getHealth1(), 2, 50);
+    drawImage(getHealth2(), 1180, 50);
+    drawImage(drawMessage("Player 1", 255, 0, 0), 2, 2);
+    drawImage(drawMessage("Player 2", 0, 0, 255), 1075, 2);
 
     SDL_RenderPresent(getRenderer());
 
@@ -86,9 +88,9 @@ void drawTile(SDL_Texture *image, int destx, int desty, int srcx, int srcy) {
     SDL_RenderCopy(getRenderer(), image, &src, &dest);
 }
 
-SDL_Texture *drawMessage(char *texte) {
+SDL_Texture *drawMessage(char *texte, int rouge, int vert,int bleu) {
 
-    SDL_Color color = {152 , 56, 153};
+    SDL_Color color = {rouge , vert, bleu};
 
     SDL_Surface *surface = TTF_RenderText_Solid(getFjalla(), texte, color);
 

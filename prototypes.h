@@ -57,7 +57,7 @@ void loadMusic();
 void cleanMusic();
 void playMusic();
 TTF_Font *getFjalla();
-SDL_Texture *drawMessage(char *texte);
+SDL_Texture *drawMessage(char *texte, int rouge, int vert,int bleu);
 SDL_Texture *getHealth1();
 void setHealth1(SDL_Texture *message);
 void reinitializePlayers();
