@@ -104,10 +104,21 @@ void drawPlayer(GameObject *player) {
     src.h = player->h;
     src.y = player->etat * player->h;
     
+    if (player->invincibleTimer > 0)
+    {
+        if (player->frameNumber % 2 == 0)
+        {
+            if (player->direction == LEFT)
+                SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
+            else
+                SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
+        }
+    }else {
     if(player->direction == LEFT)
         SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
     else
         SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
+    }
 }
 
 void updateInputs() {
@@ -118,40 +129,49 @@ void updateInputs() {
     
     updatePlayer(&player1, &input_player1);
     
-    //fight(&player1, &player2, &input_player1, &input_player2);
+    fight(&player1, &player2, &input_player1, &input_player2);
 
 }
 
-/*void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2) {
+void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2) {
     
     if((player1->x +player1->w < player2->x + player2->w && player1->x + player1->w >player2->x && input1->attack == 1)
        || (player1->x < player2->x + player2->w && player1->x > player2->x && input1->attack == 1)) {
-        if(player1->life == 3) {
-            setHealth1(loadImage());
-            player1->life--;
-        }
-        else if(player1->life == 2) {
-            setHealth1(loadImage();
-            player1->life--;
-        } else {
-            setHealth1(loadImage());
+        if (player2->invincibleTimer == 0)
+        {
+            if(player2->life == 3) {
+                setHealth2(loadImage("graphics/coeur3.png"));
+                player2->life--;
+            }
+            else if(player2->life == 2) {
+                setHealth2(loadImage("graphics/coeur5.png"));
+                player2->life--;
+            } else {
+                setHealth2(loadImage("graphics/coeur7.png"));
+            }
+            player2->invincibleTimer = 80;
         }
     }
     if((player2->x +player2->w < player1->x + player1->w && player2->x + player2->w >player1->x && input2->attack == 1)
        || (player2->x < player1->x + player1->w && player2->x > player1->x && input2->attack == 1)) {
-        if(player2->life == 3) {
-            setHealth2(loadImage());
-            player2->life--;
+        if (player1->invincibleTimer == 0)
+        {
+            if(player1->life == 3) {
+                setHealth1(loadImage("graphics/coeur3.png"));
+                player1->life--;
+            }
+            else if(player1->life == 2) {
+                setHealth1(loadImage("graphics/coeur5.png"));
+                player1->life--;
+            } else {
+                setHealth1(loadImage("graphics/coeur7.png"));
+            }
+            player1->invincibleTimer = 80;
         }
-        else if(player2->life == 2) {
-            setHealth2(loadImage();
-            player2->life--;
-        } else {
-            setHealth2(loadImage());
-        }
+
     }
 }
-*/
+
 void reinitializePlayers() {
     player1.x = getBeginPlayer1X();
     player2.x = getBeginPlayer2X();
@@ -229,8 +249,10 @@ void updatePlayer(GameObject *player, Input *input)
                 player->frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
                 player->frameMax = 4;
             }
-        }
         
+        }
+    
+    
         //Si on n'appuie sur rien et qu'on est sur le sol, on charge l'animation marquant l'inactivité (Idle)
         else if (input->right == 0 && input->left == 0 && player->onGround == 1)
         {
@@ -281,17 +303,18 @@ void updatePlayer(GameObject *player, Input *input)
                 }
             }
         }
+            if(player->saveX == 0) {
+                
+                if(input->attack == 1) {
+                    
+                    player->etat = ATK;
+                    player->frameNumber = 1;
+                    player->frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
+                    player->frameMax = 4;
+                }
+
+           }
         
-        if(player->saveX == 0) {
-            if(input->attack == 1) {
-               
-                player->etat = ATK;
-                player->w = 70;
-                player->frameNumber = 0;
-                player->frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
-                player->frameMax = 6;
-            }
-        }
         //On rajoute notre fonction de détection des collisions qui va mettre à
         //jour les coordonnées de notre super lapin.
         mapCollision(player);
