@@ -42,7 +42,7 @@
 #define WALK 1
 #define ATK 2
 #define JUMP 3
-
+#define DEATH 4
 
 #define RIGHT 1
 #define LEFT 2
@@ -52,7 +52,7 @@
 
 #define GRAVITY_SPEED 0.6
 #define MAX_FALL_SPEED 15
-#define JUMP_HEIGHT 12
+#define JUMP_HEIGHT 8
 
 #define BLANK_TILE 20
 #define TILE_TRANSVERSABLE 20

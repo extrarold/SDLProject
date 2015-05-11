@@ -65,5 +65,6 @@ void playJump();
 void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2);
 SDL_Texture *getHealth2();
 void setHealth2(SDL_Texture *message);
+void mondeSuivant(int level, char *name);
 
 #endif

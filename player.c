@@ -113,11 +113,11 @@ void drawPlayer(GameObject *player) {
             else
                 SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
         }
-    }else {
-    if(player->direction == LEFT)
-        SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
-    else
-        SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
+    } else {
+        if(player->direction == LEFT)
+            SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
+        else
+            SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
     }
 }
 
@@ -135,6 +135,12 @@ void updateInputs() {
 
 void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2) {
     
+    if(player1->life == 3)
+        setHealth1(loadImage("graphics/coeur1.png"));
+    if(player2->life == 3)
+        setHealth2(loadImage("graphics/coeur1.png"));
+
+        
     if((player1->x +player1->w < player2->x + player2->w && player1->x + player1->w >player2->x && input1->attack == 1)
        || (player1->x < player2->x + player2->w && player1->x > player2->x && input1->attack == 1)) {
         if (player2->invincibleTimer == 0)
@@ -148,6 +154,8 @@ void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input
                 player2->life--;
             } else {
                 setHealth2(loadImage("graphics/coeur7.png"));
+                player2->etat = DEATH;
+                reinitializePlayers();
             }
             player2->invincibleTimer = 80;
         }
@@ -165,6 +173,9 @@ void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input
                 player1->life--;
             } else {
                 setHealth1(loadImage("graphics/coeur7.png"));
+                 player1->etat = DEATH;
+                reinitializePlayers();
+                mondeSuivant(1, "graphics/background2.png");
             }
             player1->invincibleTimer = 80;
         }
@@ -177,7 +188,8 @@ void reinitializePlayers() {
     player2.x = getBeginPlayer2X();
     player1.y = getBeginPlayer1Y();
     player2.y = getBeginPlayer2Y();
-    
+    player1.life = 3;
+    player2.life = 3;
     player1.direction = RIGHT;
     player2.direction = LEFT;
 }
@@ -303,17 +315,17 @@ void updatePlayer(GameObject *player, Input *input)
                 }
             }
         }
-            if(player->saveX == 0) {
+        if(player->saveX == 0) {
                 
-                if(input->attack == 1) {
-                    
-                    player->etat = ATK;
-                    player->frameNumber = 1;
-                    player->frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
-                    player->frameMax = 4;
-                }
+            if(input->attack == 1) {
+                
+                player->etat = ATK;
+                player->frameNumber = 1;
+                player->frameTimer = TIME_BETWEEN_2_FRAMES_PLAYER;
+                player->frameMax = 4;
+            }
 
-           }
+        }
         
         //On rajoute notre fonction de détection des collisions qui va mettre à
         //jour les coordonnées de notre super lapin.

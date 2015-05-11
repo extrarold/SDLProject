@@ -133,6 +133,12 @@ void changeLevel() {
     map.tileSet = loadImage(file);
 }
 
+void mondeSuivant(int level, char *name) {
+    setValeurDuNiveau(level);
+    changeLevel();
+    map.background = loadImage(name);
+}
+
 int getStartX() {
     return map.startX;
 }
