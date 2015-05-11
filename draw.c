@@ -20,6 +20,8 @@ void drawGame() {
     drawImage(getHealth2(), 1180, 50);
     drawImage(drawMessage("Player 1", 255, 0, 0), 2, 2);
     drawImage(drawMessage("Player 2", 0, 0, 255), 1075, 2);
+    drawImage(getplayer1wins(), 450, 50);
+    drawImage(getplayer2wins(), 450, 50);
 
     SDL_RenderPresent(getRenderer());
 

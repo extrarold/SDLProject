@@ -190,6 +190,13 @@ void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input
         }
 
     }
+    
+    if(victoires == 0) {
+        setPlayer1wins((drawMessage("Player 1 WINS", 255, 0, 0)));
+        
+    } else if(victoires == -3) {
+        setPlayer2wins((drawMessage("Player 2 WINS", 0, 0, 255)));
+    }
 }
 
 void reinitializePlayers() {

@@ -68,5 +68,9 @@ void setHealth2(SDL_Texture *message);
 void mondeSuivant(double victoires);
 void playKick();
 double getVictoires();
+void setPlayer1wins(SDL_Texture *message);
+void setPlayer2wins(SDL_Texture *message);
+SDL_Texture *getplayer1wins();
+SDL_Texture *getplayer2wins();
 
 #endif
