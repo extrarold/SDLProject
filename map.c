@@ -163,7 +163,7 @@ void mondeSuivant(double victoires) {
         changeLevel();
     } else if(victoires == 2 || victoires == -2) {
         setValeurDuNiveau(3);
-        map.background = loadImage("graphics/background.jpg");
+        map.background = loadImage("graphics/background3.jpeg");
         changeLevel();
     }
 }
