@@ -9,11 +9,12 @@
 #include "prototypes.h"
 
 Map map;
-SDL_Texture *player1Name;
-SDL_Texture *player2Name;
+SDL_Texture *player1wins = NULL;
+SDL_Texture *player2wins = NULL;
 
 void initMaps() {
     map.background = loadImage("graphics/background.jpg");
+    
     map.tileSetNumber = 0;
     map.health1 = NULL;
     map.health2 = NULL;
@@ -39,6 +40,21 @@ void setHealth2(SDL_Texture *message) {
     map.health2 = message;
 }
 
+SDL_Texture *getplayer1wins() {
+    return player1wins;
+}
+
+SDL_Texture *getplayer2wins() {
+    return player2wins;
+}
+
+void setPlayer2wins(SDL_Texture *message) {
+    player2wins = message;
+}
+
+void setPlayer1wins(SDL_Texture *message) {
+    player1wins = message;
+}
 
 void cleanMaps() {
     if(map.background != NULL) {
@@ -137,7 +153,6 @@ void changeLevel() {
 
 void mondeSuivant(double victoires) {
     reinitializePlayers();
-    printf("%f\n", victoires);
     if(victoires == 0) {
         setValeurDuNiveau(1);
         map.background = loadImage("graphics/background.jpg");
@@ -151,13 +166,6 @@ void mondeSuivant(double victoires) {
         map.background = loadImage("graphics/background.jpg");
         changeLevel();
     }
-    
-    if(victoires == 3) {
-        
-    } else if(victoires == -3) {
-        
-    }
-    
 }
 
 int getStartX() {

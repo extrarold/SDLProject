@@ -17,12 +17,30 @@ void drawGame() {
     drawPlayer(getPlayer1());
     drawPlayer(getPlayer2());
     drawImage(getHealth1(), 2, 50);
-    drawImage(getHealth2(), 1180, 50);
+    drawOppositeImage(getHealth2(), 1180, 50);
     drawImage(drawMessage("Player 1", 255, 0, 0), 2, 2);
     drawImage(drawMessage("Player 2", 0, 0, 255), 1075, 2);
+    drawImage(getplayer1wins(), 450, 50);
+    drawImage(getplayer2wins(), 450, 50);
 
     SDL_RenderPresent(getRenderer());
+     
+    SDL_RenderClear(getRenderer());
+    
+    SDL_Delay(1);
 
+}
+
+void drawMenu() {
+    
+    drawImage(drawMessage("PRESS   ENTER   TO    START", 255, 255, 255), 400, 500);
+    drawImage(drawMessage("PLAYER 1", 255, 255, 255), 2, 200);
+    drawImage(drawMessage("PLAYER 2", 255, 255, 255), 1050, 200);
+
+    SDL_RenderPresent(getRenderer());
+    
+    SDL_RenderClear(getRenderer());
+    
     SDL_Delay(1);
 }
 
@@ -68,6 +86,18 @@ void drawImage(SDL_Texture *image, int x, int y) {
 
     SDL_QueryTexture(image, NULL, NULL, &dest.w, &dest.h);
     SDL_RenderCopy(getRenderer(), image, NULL, &dest);
+    
+}
+
+void drawOppositeImage(SDL_Texture *image, int x, int y) {
+    SDL_Rect dest;
+    
+    dest.x = x;
+    dest.y = y;
+    
+    SDL_QueryTexture(image, NULL, NULL, &dest.w, &dest.h);
+    SDL_RenderCopyEx(getRenderer(), image, NULL, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
+    
 }
 
 void drawTile(SDL_Texture *image, int destx, int desty, int srcx, int srcy) {

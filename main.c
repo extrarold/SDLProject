@@ -9,29 +9,38 @@
 
 #include "prototypes.h"
 
+int startMenu;
+int startGame;
 
 int main(int argc, const char * argv[]) {
 
     unsigned int fpsLimit = SDL_GetTicks() + 16;
 
-    int startGame;
+   
 
     init("Projet C: AAZA HEIM HEN");
 
     loadGame();
 
     initializePlayer(getPlayer1(), getBeginPlayer1X(), getBeginPlayer1Y(), RIGHT, "graphics/ryurouge.gif");
-    initializePlayer(getPlayer2(), getBeginPlayer2X(), getBeginPlayer2Y(), LEFT, "graphics/ryurouge.gif");
+    initializePlayer(getPlayer2(), getBeginPlayer2X(), getBeginPlayer2Y(), LEFT, "graphics/ryubleu.gif");
 
     atexit(clean);
 
-    startGame = 1;
+    startMenu = 1;
+    startGame = 0;
 
-    while(startGame == 1) {
+    while(startMenu == 1) {
 
         updateInputs();
+        if(!startGame)
+            drawMenu();
+        
+        if(getInput()->enter == 1)
+            startGame = 1;
 
-        drawGame();
+        if(startGame)
+            drawGame();
 
         delay(fpsLimit);
 
@@ -40,4 +49,8 @@ int main(int argc, const char * argv[]) {
     }
 
     exit(0);
+}
+
+void setStartGame(int s) {
+    startGame = s;
 }
