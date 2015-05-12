@@ -23,6 +23,7 @@ void cleanMaps();
 void loadGame();
 SDL_Texture *loadImage(char *name);
 void drawImage(SDL_Texture *image, int x, int y);
+void drawOppositeImage(SDL_Texture *image, int x, int y);
 void loadMap(char *name);
 void drawMap();
 void changeLevel();
@@ -72,5 +73,8 @@ void setPlayer1wins(SDL_Texture *message);
 void setPlayer2wins(SDL_Texture *message);
 SDL_Texture *getplayer1wins();
 SDL_Texture *getplayer2wins();
+Input *getInput();
+void drawMenu();
+void setStartGame(int s);
 
 #endif

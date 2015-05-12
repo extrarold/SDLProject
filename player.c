@@ -49,6 +49,9 @@ void setPlayery(int valeur) {
     player1.y = valeur;
 }
 
+Input *getInput() {
+    return &input_player1;
+}
 
 void cleanPlayer(SDL_Texture *name) {
     if(name != NULL) {
@@ -128,6 +131,7 @@ void drawPlayer(GameObject *player) {
 
 void updateInputs() {
     
+   
     getInputs(&input_player2, &input_player1);
     
     updatePlayer(&player2, &input_player2);
@@ -191,12 +195,12 @@ void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input
 
     }
     
-    if(victoires == 0) {
-        setPlayer1wins((drawMessage("Player 1 WINS", 255, 0, 0)));
-        
-    } else if(victoires == -3) {
-        setPlayer2wins((drawMessage("Player 2 WINS", 0, 0, 255)));
-    }
+        if(victoires == 1) {
+            setPlayer1wins((drawMessage("Player 1 WINS", 255, 255, 255)));
+            
+        } else if(victoires == -3) {
+            setPlayer2wins((drawMessage("Player 2 WINS", 255, 255, 255)));
+        }
 }
 
 void reinitializePlayers() {

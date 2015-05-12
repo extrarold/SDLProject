@@ -70,7 +70,7 @@ void getInputs(Input *input1, Input *input2) {
                     
                     
                 case SDLK_RETURN:
-                    input1->enter = 1;
+                    input2->enter = 1;
                     break;
                     
                 case SDLK_t:
@@ -82,8 +82,6 @@ void getInputs(Input *input1, Input *input2) {
                         else
                             Mix_PauseMusic();
                     }
-                        
-                    
                 default:
                     break;
             }
@@ -129,7 +127,7 @@ void getInputs(Input *input1, Input *input2) {
                     break;
                     
                 case SDLK_RETURN:
-                    input1->enter = 0;
+                    input2->enter = 0;
                     break;
                     
                 default:

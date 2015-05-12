@@ -14,6 +14,7 @@ SDL_Texture *player2wins = NULL;
 
 void initMaps() {
     map.background = loadImage("graphics/background.jpg");
+    
     map.tileSetNumber = 0;
     map.health1 = NULL;
     map.health2 = NULL;
@@ -152,7 +153,6 @@ void changeLevel() {
 
 void mondeSuivant(double victoires) {
     reinitializePlayers();
-    printf("%f\n", victoires);
     if(victoires == 0) {
         setValeurDuNiveau(1);
         map.background = loadImage("graphics/background.jpg");

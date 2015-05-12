@@ -99,8 +99,7 @@ void clean() {
 
 void loadGame() {
     initMaps();
-   // setHealth1(loadImage("graphics/coeur1.png"));
-    //setHealth2(loadImage("graphics/coeur1.png"));
+    
     loadMusic();
     playMusic();
 
