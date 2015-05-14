@@ -14,10 +14,10 @@
  
 // Taille de la fenêtre : 800x480 pixels 
 #define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 800
+#define SCREEN_HEIGHT 736
 
 #define MAX_MAP_X 40
-#define MAX_MAP_Y 25
+#define MAX_MAP_Y 23
 
 #define TILE_SIZE 32
 
@@ -39,9 +39,9 @@
 
 #define GRAVITY_SPEED 0.6
 #define MAX_FALL_SPEED 15
-#define JUMP_HEIGHT 8
+#define JUMP_HEIGHT 12
 
-#define BLANK_TILE 20
-#define TILE_TRANSVERSABLE 20
+#define BLANK_TILE 21
+#define TILE_TRANSVERSABLE 21
  
 #endif
