@@ -74,8 +74,8 @@ void loadMap(char *name) {
         }
     }
     
-    map.maxX = 1280;
-    map.maxY = 800;
+    map.maxX = (map.maxX + 1) * TILE_SIZE;
+    map.maxY = (map.maxY + 1) * TILE_SIZE;
     
     fclose(fp);
     
