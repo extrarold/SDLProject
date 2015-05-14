@@ -1,20 +1,13 @@
-//
-//  structs.h
-//  SDLTest
-//
-//  Created by Harold Heim on 01/05/2015.
-//  Copyright (c) 2015 Harold Heim. All rights reserved.
-//
-
-#ifndef SDLTest_structs_h
-#define SDLTest_structs_h
-
+#ifndef DEF_STRUCTS
+#define DEF_STRUCTS
+ 
 #include "const.h"
-
+ 
+ 
 typedef struct Input {
     int left, right, up, down, jump, attack, enter;
 }Input;
-
+ 
 typedef struct Map {
     SDL_Texture *background;
     SDL_Texture *tileSet;
@@ -25,7 +18,7 @@ typedef struct Map {
     int begin_player1x, begin_player1y, begin_player2x, begin_player2y;
     int startX, startY;
     int maxX, maxY;
-    int tile[MAP_Y][MAP_X];
+    int tile[MAX_MAP_Y][MAX_MAP_X];
     int tileSetNumber;
 }Map;
 
@@ -40,6 +33,5 @@ typedef struct GameOBject {
     int saveX, saveY;
     SDL_Texture *spriteSheet;
 }GameObject;
-
 
 #endif

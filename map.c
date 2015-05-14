@@ -1,21 +1,13 @@
-//
-//  map.c
-//  SDLTest
-//
-//  Created by Harold Heim on 01/05/2015.
-//  Copyright (c) 2015 Harold Heim. All rights reserved.
-//
-
 #include "prototypes.h"
 
+
 Map map;
-SDL_Texture *player1wins = NULL;
-SDL_Texture *player2wins = NULL;
 
 void initMaps() {
     map.background = loadImage("graphics/background.jpg");
     
     map.tileSetNumber = 0;
+    
     map.health1 = NULL;
     map.health2 = NULL;
 }
@@ -40,22 +32,6 @@ void setHealth2(SDL_Texture *message) {
     map.health2 = message;
 }
 
-SDL_Texture *getplayer1wins() {
-    return player1wins;
-}
-
-SDL_Texture *getplayer2wins() {
-    return player2wins;
-}
-
-void setPlayer2wins(SDL_Texture *message) {
-    player2wins = message;
-}
-
-void setPlayer1wins(SDL_Texture *message) {
-    player1wins = message;
-}
-
 void cleanMaps() {
     if(map.background != NULL) {
         SDL_DestroyTexture(map.background);
@@ -78,7 +54,7 @@ void loadMap(char *name) {
         printf("Impossible d'ouvrir la map %s\n", name);
         exit(1);
     }
-    
+   
     fscanf(fp, "%d", &map.begin_player1x);
     fscanf(fp, "%d", &map.begin_player1y);
     
@@ -88,10 +64,12 @@ void loadMap(char *name) {
     
     fscanf(fp, "%d", &map.tileSetAffiche);
     
-    map.maxX = map.maxY = 0;
+    map.maxX = 0;
+    map.maxY = 0;
     
-    for(y = 0; y < SCREEN_HEIGHT; y++) {
-        for(x = 0; x < SCREEN_WIDTH; x++ ) {
+    
+    for(y = 0; y < MAX_MAP_Y; y++) {
+        for(x = 0; x < MAX_MAP_X; x++ ) {
             fscanf(fp, "%d", &map.tile[y][x]);
             
             if(map.tile[x][y] > 0) {
@@ -107,6 +85,7 @@ void loadMap(char *name) {
     map.maxY = (map.maxY + 1) * TILE_SIZE;
     
     fclose(fp);
+    
 }
 
 void drawMap() {
@@ -137,35 +116,26 @@ void drawMap() {
     
 }
 
-void changeLevel() {
-    char file[200];
-    
-    sprintf(file, "map/map%d.txt", getLevel());
-    loadMap(file);
-    
-    if(map.tileSet != NULL)
-        SDL_DestroyTexture(map.tileSet);
-    
-    sprintf(file, "graphics/tileset%d.png", map.tileSetAffiche);
-    
-    map.tileSet = loadImage(file);
-}
+void changeLevel(void)
+{
+ 
+	char file[200];
+	  
 
-void mondeSuivant(double victoires) {
-    reinitializePlayers();
-    if(victoires == 0) {
-        setValeurDuNiveau(1);
-        map.background = loadImage("graphics/background.jpg");
-    }
-    else if(victoires == 1 || victoires == -1) {
-        setValeurDuNiveau(2);
-        map.background = loadImage("graphics/background2.png");
-        changeLevel();
-    } else if(victoires == 2 || victoires == -2) {
-        setValeurDuNiveau(3);
-        map.background = loadImage("graphics/background3.jpeg");
-        changeLevel();
-    }
+	sprintf(file, "map/map%d.txt", getLevel());
+	
+	loadMap(file);
+	
+	//Charge le tileset
+	if (map.tileSet != NULL)
+	{
+	SDL_DestroyTexture(map.tileSet);
+	}
+	 
+	sprintf(file, "graphics/tileset%d.png", map.tileSetAffiche);
+	
+	map.tileSet = loadImage(file); 
+	
 }
 
 int getStartX() {
@@ -380,5 +350,22 @@ void mapCollision(GameObject *entity)
         //Si on touche le bord droit de l'écran, on annule
         //et on limite le déplacement du joueur
         entity->x = map.maxX - entity->w - 1;
+    }
+}
+
+void mondeSuivant(double victoires) {
+    reinitializePlayers();
+    if(victoires == 0) {
+        setValeurDuNiveau(1);
+        map.background = loadImage("graphics/background.jpg");
+    }
+    else if(victoires == 1 || victoires == -1) {
+        setValeurDuNiveau(2);
+        map.background = loadImage("graphics/background2.png");
+        changeLevel();
+    } else if(victoires == 2 || victoires == -2) {
+        setValeurDuNiveau(3);
+        map.background = loadImage("graphics/background3.jpeg");
+        changeLevel();
     }
 }

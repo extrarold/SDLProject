@@ -9,10 +9,10 @@
 #include "prototypes.h"
 
 
+
 void getInputs(Input *input1, Input *input2) {
     SDL_Event event;
 
-    
     while (SDL_PollEvent(&event))
     {
         switch (event.type)
@@ -36,7 +36,7 @@ void getInputs(Input *input1, Input *input2) {
                     
                 case SDLK_z:
                     input2->jump = 1;
-                    playJump();
+					playJump();
                     break;
                     
                 case SDLK_v:
@@ -74,14 +74,7 @@ void getInputs(Input *input1, Input *input2) {
                     break;
                     
                 case SDLK_t:
-                    if(Mix_PlayingMusic() == 0)
-                        playMusic();
-                    else {
-                        if(Mix_PausedMusic())
-                            Mix_ResumeMusic();
-                        else
-                            Mix_PauseMusic();
-                    }
+                    
                 default:
                     break;
             }
@@ -139,4 +132,3 @@ void getInputs(Input *input1, Input *input2) {
         
     }
 }
-

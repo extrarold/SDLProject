@@ -1,59 +1,67 @@
-//
-//  draw.c
-//  SDLTest
-//
-//  Created by Harold Heim on 01/05/2015.
-//  Copyright (c) 2015 Harold Heim. All rights reserved.
-//
-
 #include "prototypes.h"
 
-void drawGame() {
-
-    drawImage(getBackground(), 0, 0);
-
-    drawMap();
-
-    drawPlayer(getPlayer1());
+SDL_Color couleurBleue = {0, 0, 255};
+SDL_Color couleurRouge = {255, 0, 0};
+SDL_Color couleurBlanche = {255, 255, 255};
+	
+void drawGame(void)
+{
+	drawImage(getBackground(), 0, 0);
+	
+	drawMap();
+	
+	drawPlayer(getPlayer1());
     drawPlayer(getPlayer2());
-    drawImage(getHealth1(), 2, 50);
-    drawOppositeImage(getHealth2(), 1180, 50);
-    drawImage(drawMessage("Player 1", 255, 0, 0), 2, 2);
-    drawImage(drawMessage("Player 2", 0, 0, 255), 1075, 2);
-    drawImage(getplayer1wins(), 450, 50);
-    drawImage(getplayer2wins(), 450, 50);
-
-    SDL_RenderPresent(getRenderer());
+    
+	drawImage(getHealth1(), 2, 50);
+	drawOppositeImage(getHealth2(), 1180, 50);
+	
+	writeTxt("Player 1", 2, 2, 50, couleurRouge);
+	writeTxt("Player 2", 1075, 2, 50, couleurBleue);
+	
+    SDL_RenderPresent(getrenderer());
      
-    SDL_RenderClear(getRenderer());
+    SDL_RenderClear(getrenderer());
     
     SDL_Delay(1);
-
 }
+
 
 void drawMenu() {
     
-    drawImage(drawMessage("PRESS   ENTER   TO    START", 255, 255, 255), 400, 500);
-    drawImage(drawMessage("PLAYER 1", 255, 255, 255), 2, 200);
-    drawImage(drawMessage("PLAYER 2", 255, 255, 255), 1050, 200);
+    writeTxt("PRESS   ENTER   TO    START", 400, 500, 50, couleurBlanche);
+	writeTxt("PLAYER 1", 2, 200, 50, couleurBlanche);
+	writeTxt("PLAYER 2", 1050, 200, 50, couleurBlanche);
+   // drawImage(drawMessage("PRESS   ENTER   TO    START", 255, 255, 255), 400, 500);
+    //drawImage(drawMessage("PLAYER 1", 255, 255, 255), 2, 200);
+    //drawImage(drawMessage("PLAYER 2", 255, 255, 255), 1050, 200);
 
-    SDL_RenderPresent(getRenderer());
+    SDL_RenderPresent(getrenderer());
     
-    SDL_RenderClear(getRenderer());
+    SDL_RenderClear(getrenderer());
     
     SDL_Delay(1);
 }
-
-void delay(unsigned int fpsLimit) {
+ 
+void delay(unsigned int frameLimit)
+{
+    // Gestion des 60 fps (images/stories/seconde)
     unsigned int ticks = SDL_GetTicks();
-
-    if(fpsLimit < ticks)
+ 
+    if (frameLimit < ticks)
+    {
         return;
-
-    if (fpsLimit > ticks + 16)
+    }
+ 
+    if (frameLimit > ticks + 16)
+    {
         SDL_Delay(16);
+    }
+ 
     else
-        SDL_Delay(fpsLimit - ticks);
+    {
+        SDL_Delay(frameLimit - ticks);
+    }
 }
 
 SDL_Texture *loadImage(char *name) {
@@ -66,7 +74,7 @@ SDL_Texture *loadImage(char *name) {
     if(loadedImage != NULL) {
 
 
-        texture = SDL_CreateTextureFromSurface(getRenderer(), loadedImage);
+        texture = SDL_CreateTextureFromSurface(getrenderer(), loadedImage);
 
         SDL_FreeSurface(loadedImage);
         loadedImage = NULL;
@@ -77,7 +85,6 @@ SDL_Texture *loadImage(char *name) {
     return texture;
 }
 
-
 void drawImage(SDL_Texture *image, int x, int y) {
     SDL_Rect dest;
 
@@ -85,7 +92,7 @@ void drawImage(SDL_Texture *image, int x, int y) {
     dest.y = y;
 
     SDL_QueryTexture(image, NULL, NULL, &dest.w, &dest.h);
-    SDL_RenderCopy(getRenderer(), image, NULL, &dest);
+    SDL_RenderCopy(getrenderer(), image, NULL, &dest);
     
 }
 
@@ -96,7 +103,7 @@ void drawOppositeImage(SDL_Texture *image, int x, int y) {
     dest.y = y;
     
     SDL_QueryTexture(image, NULL, NULL, &dest.w, &dest.h);
-    SDL_RenderCopyEx(getRenderer(), image, NULL, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
+    SDL_RenderCopyEx(getrenderer(), image, NULL, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
     
 }
 
@@ -115,18 +122,39 @@ void drawTile(SDL_Texture *image, int destx, int desty, int srcx, int srcy) {
     src.w = TILE_SIZE;
     src.h = TILE_SIZE;
 
-    SDL_RenderCopy(getRenderer(), image, &src, &dest);
+    SDL_RenderCopy(getrenderer(), image, &src, &dest);
 }
 
-SDL_Texture *drawMessage(char *texte, int rouge, int vert,int bleu) {
 
-    SDL_Color color = {rouge , vert, bleu};
+int writeTxt(char *message, signed int x, signed int y, int size, SDL_Color color)
+{
+    int rslt = 0;
 
-    SDL_Surface *surface = TTF_RenderText_Solid(getFjalla(), texte, color);
+    if(message != NULL)
+    {
+        TTF_Font *myFont = NULL;
+        SDL_Surface* txt = NULL;
+        SDL_Texture *texture = NULL;
 
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(getRenderer(), surface);
+        myFont = TTF_OpenFont("fonts/arcade.TTF", size);
 
-    SDL_FreeSurface(surface);
-    surface = NULL;
-    return texture;
+        if(myFont == NULL)
+        {
+            rslt = 1;
+        }
+        else
+        {
+            txt = TTF_RenderText_Blended(myFont, message, color);
+            texture = SDL_CreateTextureFromSurface(getrenderer(), txt);
+            drawImage(texture, x, y);
+        }
+
+        TTF_CloseFont(myFont);
+        SDL_FreeSurface(txt);
+    }
+    else
+    {
+        rslt = 1;
+    }
+    return rslt;
 }

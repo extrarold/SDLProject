@@ -1,11 +1,3 @@
-//
-//  music.c
-//  SDLTest
-//
-//  Created by Harold Heim on 08/05/2015.
-//  Copyright (c) 2015 Harold Heim. All rights reserved.
-//
-
 #include "prototypes.h"
 
 Mix_Music *gMusic = NULL;

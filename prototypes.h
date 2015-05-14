@@ -1,80 +1,48 @@
-//
-//  prototypes.h
-//  SDLTest
-//
-//  Created by Harold Heim on 01/05/2015.
-//  Copyright (c) 2015 Harold Heim. All rights reserved.
-//
-
-#ifndef SDLTest_prototypes_h
-#define SDLTest_prototypes_h
-
+ #include "structs.h"
+ 
+#ifndef PROTOTYPES
+#define PROTOTYPES
+ 
 #include "structs.h"
 
-SDL_Renderer *getRenderer();
-void init(char *title);
-void clean();
-void drawGame();
-void delay(unsigned int fpsLimit);
+void cleanup(void);
+void delay(unsigned int frameLimit);
+void drawGame(void);
+void gestionInputs(Input *input);
 void getInputs(Input *input1, Input *input2);
+SDL_Renderer *getrenderer(void);
+void init(char *);
 void initMaps();
 SDL_Texture *getBackground();
 void cleanMaps();
 void loadGame();
 SDL_Texture *loadImage(char *name);
 void drawImage(SDL_Texture *image, int x, int y);
-void drawOppositeImage(SDL_Texture *image, int x, int y);
-void loadMap(char *name);
 void drawMap();
-void changeLevel();
-int getLevel();
-void setValeurDuNiveau(int level);
-void drawTile(SDL_Texture *image, int destx, int desty, int srcx, int srcy);
-GameObject *getPlayer1();
-GameObject *getPlayer2();
-int getPlayerx();
-int getPlayery();
-void setPlayerx(int valeur);
-void setPlayery(int valeur);
-void initPlayerSprites();
-void cleanPlayer();
-void initializePlayer(GameObject *player, int x, int y, int direction, char *nameTexture);
-void drawPlayer();
-void drawPlayer2();
-int getBeginPlayer1X();
-int getBeginPlayer2X();
-int getBeginPlayer1Y();
-int getBeginPlayer2Y();
-int getMaxY();
-int getMaxX();
-void setStartY(int valeur);
-void setStartX(int valeur);
-int getStartY();
-int getStartX();
-void updatePlayer(GameObject *player, Input *input);
-void mapCollision(GameObject *entity);
+void loadMap(char *name);
 void updateInputs();
-void loadMusic();
-void cleanMusic();
-void playMusic();
-TTF_Font *getFjalla();
-SDL_Texture *drawMessage(char *texte, int rouge, int vert,int bleu);
-SDL_Texture *getHealth1();
-void setHealth1(SDL_Texture *message);
-void reinitializePlayers();
-void playJump();
-void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2);
-SDL_Texture *getHealth2();
-void setHealth2(SDL_Texture *message);
-void mondeSuivant(double victoires);
-void playKick();
-double getVictoires();
-void setPlayer1wins(SDL_Texture *message);
-void setPlayer2wins(SDL_Texture *message);
-SDL_Texture *getplayer1wins();
-SDL_Texture *getplayer2wins();
-Input *getInput();
 void drawMenu();
-void setStartGame(int s);
-
+SDL_Texture *drawMessage(char *texte, int rouge, int vert,int bleu);
+TTF_Font getFjalla();
+int writeTxt(char *message, signed int x, signed int y, int size, SDL_Color color);
+Input *getInput();
+void mapCollision(GameObject *entity);
+SDL_Texture *getHealth1();
+SDL_Texture *getHealth2();
+void drawOppositeImage(SDL_Texture *image, int x, int y);
+void initializePlayer(GameObject *player, int x, int y, int direction, char *nameTexture);
+GameObject *getPlayer2();
+GameObject *getPlayer1(); 
+void drawPlayer(GameObject *player);
+void updatePlayer(GameObject *player, Input *input);
+void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2);
+double getVictoires();
+void mondeSuivant(double victoires);
+void reinitializePlayers();
+void setHealth1(SDL_Texture *message);
+void setHealth2(SDL_Texture *message);
+void playKick();
+void playJump();
+void playMusic();
+ 
 #endif

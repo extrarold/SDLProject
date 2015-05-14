@@ -1,14 +1,7 @@
-//
-//  player.c
-//  SDLTest
-//
-//  Created by Harold Heim on 01/05/2015.
-//  Copyright (c) 2015 Harold Heim. All rights reserved.
-//
-
 #include "prototypes.h"
 
 int level;
+
 GameObject player1, player2;
 Input input_player1, input_player2;
 double victoires = 0;
@@ -33,31 +26,20 @@ GameObject *getPlayer2() {
     return &player2;
 }
 
-int getPlayerx() {
-    return player1.x;
-}
+void updateInputs() {
+    
+    getInputs(&input_player2, &input_player1);
+    
+    updatePlayer(&player2, &input_player2);
+    
+    updatePlayer(&player1, &input_player1);
+    
+    fight(&player1, &player2, &input_player1, &input_player2);
 
-int getPlayery() {
-    return player1.y;
-}
-
-void setPlayerx(int valeur) {
-    player1.x = valeur;
-}
-
-void setPlayery(int valeur) {
-    player1.y = valeur;
 }
 
 Input *getInput() {
     return &input_player1;
-}
-
-void cleanPlayer(SDL_Texture *name) {
-    if(name != NULL) {
-        SDL_DestroyTexture(name);
-        name = NULL;
-    }
 }
 
 void initializePlayer(GameObject *player, int x, int y, int direction, char *nameTexture) {
@@ -85,8 +67,6 @@ void initializePlayer(GameObject *player, int x, int y, int direction, char *nam
     
     player->spriteSheet = loadImage(nameTexture);
 }
-
-
 
 void drawPlayer(GameObject *player) {
     
@@ -117,105 +97,17 @@ void drawPlayer(GameObject *player) {
         if (player->frameNumber % 2 == 0)
         {
             if (player->direction == LEFT)
-                SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
+                SDL_RenderCopyEx(getrenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
             else
-                SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
+                SDL_RenderCopyEx(getrenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
         }
     } else {
         if(player->direction == LEFT)
-            SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
+            SDL_RenderCopyEx(getrenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_HORIZONTAL);
         else
-            SDL_RenderCopyEx(getRenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
+            SDL_RenderCopyEx(getrenderer(), player->spriteSheet, &src, &dest, 0, 0, SDL_FLIP_NONE);
     }
 }
-
-void updateInputs() {
-    
-   
-    getInputs(&input_player2, &input_player1);
-    
-    updatePlayer(&player2, &input_player2);
-    
-    updatePlayer(&player1, &input_player1);
-    
-    fight(&player1, &player2, &input_player1, &input_player2);
-
-}
-
-void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2) {
-    
-    if(player1->life == 3)
-        setHealth1(loadImage("graphics/coeur1.png"));
-    if(player2->life == 3)
-        setHealth2(loadImage("graphics/coeur1.png"));
-
-        
-    if((player1->x +player1->w < player2->x + player2->w && player1->x + player1->w >player2->x && input1->attack == 1)
-       || (player1->x < player2->x + player2->w && player1->x > player2->x && input1->attack == 1)) {
-        playKick();
-        if (player2->invincibleTimer == 0)
-        {
-            if(player2->life == 3) {
-                setHealth2(loadImage("graphics/coeur3.png"));
-                player2->life--;
-            }
-            else if(player2->life == 2) {
-                setHealth2(loadImage("graphics/coeur5.png"));
-                player2->life--;
-            } else {
-                setHealth2(loadImage("graphics/coeur7.png"));
-                player2->etat = DEATH;
-                
-                victoires++;
-                mondeSuivant(victoires);
-            }
-            player2->invincibleTimer = 80;
-        }
-    }
-    if((player2->x +player2->w < player1->x + player1->w && player2->x + player2->w >player1->x && input2->attack == 1)
-       || (player2->x < player1->x + player1->w && player2->x > player1->x && input2->attack == 1)) {
-        playKick();
-        if (player1->invincibleTimer == 0)
-        {
-            if(player1->life == 3) {
-                setHealth1(loadImage("graphics/coeur3.png"));
-                player1->life--;
-            }
-            else if(player1->life == 2) {
-                setHealth1(loadImage("graphics/coeur5.png"));
-                player1->life--;
-            } else {
-                setHealth1(loadImage("graphics/coeur7.png"));
-                player1->etat = DEATH;
-                victoires--;
-                mondeSuivant(victoires);
-            }
-            player1->invincibleTimer = 80;
-        }
-
-    }
-    
-
-
-    if(victoires == 3) {
-        setPlayer1wins((drawMessage("Player 1 WINS", 255, 255, 255)));
-        
-    } else if(victoires == -3) {
-        setPlayer2wins((drawMessage("Player 2 WINS", 255, 255, 255)));
-    }
-}
-
-void reinitializePlayers() {
-    player1.x = getBeginPlayer1X();
-    player2.x = getBeginPlayer2X();
-    player1.y = getBeginPlayer1Y();
-    player2.y = getBeginPlayer2Y();
-    player1.life = 3;
-    player2.life = 3;
-    player1.direction = RIGHT;
-    player2.direction = LEFT;
-}
-
 
 void updatePlayer(GameObject *player, Input *input)
 {
@@ -353,5 +245,79 @@ void updatePlayer(GameObject *player, Input *input)
         //jour les coordonnées de notre super lapin.
         mapCollision(player);
         
+    }
+}
+
+void reinitializePlayers() {
+    player1.x = getBeginPlayer1X();
+    player2.x = getBeginPlayer2X();
+    player1.y = getBeginPlayer1Y();
+    player2.y = getBeginPlayer2Y();
+    player1.life = 3;
+    player2.life = 3;
+    player1.direction = RIGHT;
+    player2.direction = LEFT;
+}
+
+void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2) {
+    
+    if(player1->life == 3)
+        setHealth1(loadImage("graphics/coeur1.png"));
+    if(player2->life == 3)
+        setHealth2(loadImage("graphics/coeur1.png"));
+
+        
+    if((player1->x +player1->w < player2->x + player2->w && player1->x + player1->w >player2->x && input1->attack == 1)
+       || (player1->x < player2->x + player2->w && player1->x > player2->x && input1->attack == 1)) {
+        playKick();
+        if (player2->invincibleTimer == 0)
+        {
+            if(player2->life == 3) {
+                setHealth2(loadImage("graphics/coeur3.png"));
+                player2->life--;
+            }
+            else if(player2->life == 2) {
+                setHealth2(loadImage("graphics/coeur5.png"));
+                player2->life--;
+            } else {
+                setHealth2(loadImage("graphics/coeur7.png"));
+                player2->etat = DEATH;
+                
+                victoires++;
+                mondeSuivant(victoires);
+            }
+            player2->invincibleTimer = 80;
+        }
+    }
+    if((player2->x +player2->w < player1->x + player1->w && player2->x + player2->w >player1->x && input2->attack == 1)
+       || (player2->x < player1->x + player1->w && player2->x > player1->x && input2->attack == 1)) {
+        playKick();
+        if (player1->invincibleTimer == 0)
+        {
+            if(player1->life == 3) {
+                setHealth1(loadImage("graphics/coeur3.png"));
+                player1->life--;
+            }
+            else if(player1->life == 2) {
+                setHealth1(loadImage("graphics/coeur5.png"));
+                player1->life--;
+            } else {
+                setHealth1(loadImage("graphics/coeur7.png"));
+                player1->etat = DEATH;
+                victoires--;
+                mondeSuivant(victoires);
+            }
+            player1->invincibleTimer = 80;
+        }
+
+    }
+    
+
+
+    if(victoires == 3) {
+        //setPlayer1wins((drawMessage("Player 1 WINS", 255, 255, 255)));
+        
+    } else if(victoires == -3) {
+        //setPlayer2wins((drawMessage("Player 2 WINS", 255, 255, 255)));
     }
 }
