@@ -44,6 +44,6 @@ void setHealth2(SDL_Texture *message);
 void playKick();
 void playJump();
 void playMusic();
-void setGame(int game);
+int getGame();
  
 #endif

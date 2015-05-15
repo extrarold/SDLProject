@@ -45,7 +45,7 @@ void drawMenu() {
 	} else if (getVictoires() == -3) {
 	    writeTxt("Player 2 WINS", 480, 200, 50, couleurBlanche);	
 	}
-    writeTxt("AHH PRODUCTION", 480, 680, 50, couleurBlanche);
+    writeTxt("AHH PRODUCTION", 480, 700, 50, couleurBlanche);
     SDL_RenderPresent(getrenderer());
     
     SDL_RenderClear(getrenderer());

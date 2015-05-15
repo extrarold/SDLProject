@@ -31,7 +31,8 @@ void getInputs(Input *input1, Input *input2) {
                     
                 case SDLK_UP:
                     input1->jump = 1;
-                    playJump();
+                    //Mix_VolumeChunk(getJump(), MIX_MAX_VOLUME/4);
+    	            Mix_PlayChannel(-1, getJump(), 0);
                     break;
                     
                 case SDLK_z:

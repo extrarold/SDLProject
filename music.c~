@@ -4,6 +4,9 @@ Mix_Music *gMusic = NULL;
 Mix_Chunk *gJump = NULL;
 Mix_Chunk *gKick = NULL;
 
+Mix_Chunk *getJump() {
+    return gJump;
+}
 
 void loadMusic() {
     gMusic = Mix_LoadMUS("sounds/seashore.mp3");

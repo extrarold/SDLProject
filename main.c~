@@ -48,6 +48,6 @@ int main(int argc, char *argv[])
  
 }
 
-void setGame(int game) {
-	startGame = game;
+int getGame() {
+	return startGame;
 }

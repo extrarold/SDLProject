@@ -347,7 +347,7 @@ void mapCollision(GameObject *entity)
 }
 
 void mondeSuivant(double victoires) {
-    if(victoires != 3 || victoires != -3)
+    if(victoires != 3)
         reinitializePlayers();
     if(victoires == 0) {
         setValeurDuNiveau(1);
