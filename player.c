@@ -252,11 +252,13 @@ void updatePlayer(GameObject *player, Input *input)
         if(getVictoires() == 3) {
 			setVictoires(0);
 			mondeSuivant(getVictoires());
+			changeLevel();
 			setGame(0);	
 
 		} else if (getVictoires() == -3) {
 			setVictoires(0);
 			mondeSuivant(getVictoires());
+			changeLevel();
 			setGame(0);	
 		}
     }
