@@ -4,10 +4,14 @@ int level;
 
 GameObject player1, player2;
 Input input_player1, input_player2;
-double victoires = 0;
+int victoires = 0;
 
-double getVictoires() {
+int getVictoires() {
     return victoires;
+}
+
+void setVictoires(int valeur) {
+	victoires = valeur;
 }
 
 int getLevel() {
@@ -245,6 +249,16 @@ void updatePlayer(GameObject *player, Input *input)
         //jour les coordonnées de notre super lapin.
         mapCollision(player);
         
+        if(getVictoires() == 3) {
+			setVictoires(0);
+			mondeSuivant(getVictoires());
+			setGame(0);	
+
+		} else if (getVictoires() == -3) {
+			setVictoires(0);
+			mondeSuivant(getVictoires());
+			setGame(0);	
+		}
     }
 }
 

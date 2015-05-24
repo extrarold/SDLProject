@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     int go;
  
     // Initialisation de la SDL 
-    init("Projet C: AAZA HEIM HEN");
+    init("Projet C: Eggy");
 	
 	loadGame();
 	
@@ -30,11 +30,16 @@ int main(int argc, char *argv[])
     // Boucle infinie, principale, du jeu 
     while (startMenu == 1)
     {
+		
+		printf("%d", getVictoires());
 		updateInputs();
-		if(!startGame)
+		
+        if(getInput()->enter == 1) {
+			setGame(1);
+		}
+        if(!startGame)
             drawMenu();
-        if(getInput()->enter == 1)
-            startGame = 1;
+            
         if(startGame)
             drawGame();
  

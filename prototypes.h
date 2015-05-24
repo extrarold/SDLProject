@@ -36,7 +36,7 @@ GameObject *getPlayer1();
 void drawPlayer(GameObject *player);
 void updatePlayer(GameObject *player, Input *input);
 void fight(GameObject *player1, GameObject *player2, Input *input1, Input *input2);
-double getVictoires();
+int getVictoires();
 void mondeSuivant(double victoires);
 void reinitializePlayers();
 void setHealth1(SDL_Texture *message);
@@ -45,5 +45,6 @@ void playKick();
 void playJump();
 void playMusic();
 void setGame(int game);
+void setVictoires(int valeur);
  
 #endif

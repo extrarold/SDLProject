@@ -19,13 +19,7 @@ void drawGame(void)
 	writeTxt("Player 1", 2, 2, 50, couleurRouge);
 	writeTxt("Player 2", 1075, 2, 50, couleurBleue);
 
-	if(getVictoires() == 3) {
-	    
-	    setGame(0);	
-
-	} else if (getVictoires() == -3) {
-	    setGame(0);	
-	}
+	
 	
     SDL_RenderPresent(getrenderer());
      
@@ -40,11 +34,6 @@ void drawMenu() {
     writeTxt("PRESS   ENTER   TO    START", 390, 500, 50, couleurBlanche);
 	writeTxt("PLAYER 1", 2, 200, 50, couleurBlanche);
 	writeTxt("PLAYER 2", 1050, 200, 50, couleurBlanche);
-    if(getVictoires() == 3) {
-	    writeTxt("Player 1 WINS", 480, 200, 50, couleurBlanche);
-	} else if (getVictoires() == -3) {
-	    writeTxt("Player 2 WINS", 480, 200, 50, couleurBlanche);	
-	}
     writeTxt("AHH PRODUCTION", 480, 680, 50, couleurBlanche);
     SDL_RenderPresent(getrenderer());
     
